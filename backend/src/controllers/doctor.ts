@@ -75,9 +75,31 @@ export const getDoctorById = async(req: Request, res: Response) => {
 
 export const createDoctor = async (req: Request, res: Response) => {
     try {
-        const { name, gender, age, email, phone, city_id, speciality_id,institute_name, degree_name, YOE, consultation_fee, profile_picture } = req.body;
-
-        
+        const { name, gender, age, email, phone, city, speciality,institute_name, degree_name, YOE, consultation_fee, profile_picture } = req.body;
+         console.log("creating doctor");
+         let city_id: number | null = null;
+         if(city && typeof city === 'string') {
+            console.log("city_fetching");
+            const [cityRows]: any = await pool.query(`Select id from cities where name = ?`, [city.trim()]);
+            if(cityRows.length>0) {
+                city_id=cityRows[0].id;
+            }
+            console.log("city_id", city_id);
+            if(city_id===null) {
+                return res.status(400).json({msg: 'Invalid city name'});
+            }
+         }
+         
+         let speciality_id: number | null = null;
+         if(speciality && typeof speciality === 'string') {
+            const [specialityRows]: any = await pool.query(`Select id from specialities where name = ?`, [speciality.trim()]);
+            if(specialityRows.length>0) {
+                speciality_id=specialityRows[0].id;
+            }
+            if(speciality_id===null) {
+                return res.status(400).json({msg: 'Invalid speciality name'});
+            }
+         }
 
         const [result]: any = await pool.query(`Insert into doctor (name, gender, age, email, phone, city_id, speciality_id, institute_name, degree_name, YOE, consultation_fee, profile_picture) VALUES 
            (?,?,?,?,?,?,?,?,?,?,?,?)`, [name, gender,age, email, phone, city_id, speciality_id, institute_name, degree_name, YOE, consultation_fee, profile_picture]);
