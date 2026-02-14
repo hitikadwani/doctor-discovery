@@ -40,7 +40,7 @@ export function Home() {
                 <h2>Most Searched Doctors</h2>
                 <div className="grid">
                     {Array.isArray(mostSearched) && mostSearched.map((d) => (
-                        <DoctorCard key={d.id} doctor={d} />
+                        <DoctorCard key={d.id ?? d.ID} doctor={d} />
                     ))}
                 </div>
             </section>

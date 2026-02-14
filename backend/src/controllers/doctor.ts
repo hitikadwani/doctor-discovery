@@ -28,7 +28,7 @@ export const getDoctors = async (req: Request, res: Response) => {
         }
     }
 
-    let query = `Select d.* from doctor d inner join specialities s on d.speciality_id = s.id inner join cities c on c.id=d.city_id where 1=1  `;
+    let query = `Select d.*, c.name as city_name,s.name as speciality_name from doctor d inner join specialities s on d.speciality_id = s.id inner join cities c on c.id=d.city_id where 1=1  `;
 
     
     

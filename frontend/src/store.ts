@@ -5,7 +5,7 @@ const BASE = 'http://localhost:5000/api';
 
 
 
-export const getDoctors = createAsyncThunk('doctors/getDoctors',
+export const getDoctors = createAsyncThunk('app/getDoctors',
     async (params: {
         name?: string;
         city?: string;
@@ -24,22 +24,23 @@ export const getDoctors = createAsyncThunk('doctors/getDoctors',
 
         const res =await fetch(`${BASE}/doctors?${q}`);
         const data = await res.json();
-
+        
+        const page = rest.page ?? 1;
         if (target === 'mostSearched') {
-          return { data, target: 'mostSearched' };
+          return { data, target: 'mostSearched', page: 1 };
         } else {
-          return { data, target: 'listing' };
+          return { data, target: 'listing',page };
         }
 
     }
 );
 
-export const getCities = createAsyncThunk('/app/getCities', async () => {
+export const getCities = createAsyncThunk('app/getCities', async () => {
     const res = await fetch(`${BASE}/cities`);
     return res.json();
 });
 
-export const getSpecialities = createAsyncThunk('/app/getSpecialities', async () => {
+export const getSpecialities = createAsyncThunk('app/getSpecialities', async () => {
     const res = await fetch(`${BASE}/specialities`);
     return res.json();
 })
@@ -59,10 +60,16 @@ const slice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getDoctors.pending, (state)=> {state.loading=true});
         builder.addCase(getDoctors.fulfilled, (state, action)=> {
-            const { data, target } =action.payload;
+            const { data, target, page } =action.payload;
             if(target === 'mostSearched') {
                 state.mostSearched=data;
-            }else state.doctors=data;
+            }else {
+                if(page ===1) {
+                    state.doctors=data;
+                }else {
+                    state.doctors=[...state.doctors, ...data];
+                }
+            }
             state.loading=false;
         });
         builder.addCase(getCities.fulfilled, (state, action) => {
