@@ -4,6 +4,7 @@ import { store } from './store';
 import { Home } from './Home';
 import { DoctorListing } from './DoctorListing';
 import { DoctorDetail } from './DoctorDetail';
+import { DoctorRegister } from './DoctorRegister';
 import './index.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/doctors" element={<DoctorListing />} />
         <Route path="doctors/:id" element={<DoctorDetail />} />
+        <Route path="doctors/register" element={<DoctorRegister />} />
       </Routes>
       </BrowserRouter>
     </Provider>

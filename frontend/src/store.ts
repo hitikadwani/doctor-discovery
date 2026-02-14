@@ -1,4 +1,5 @@
 import { configureStore, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { error } from "console";
 
 
 const BASE = 'http://localhost:5000/api';
@@ -49,6 +50,17 @@ export const getDoctorById = createAsyncThunk('app/getDoctorById', async(id: str
     const res = await fetch(`${BASE}/doctors/${id}`);
     return res.json();
 });
+
+export const createDoctor = createAsyncThunk('app/createDoctor', async (body: Record<string,any>) => {
+    const res = await fetch(`${BASE}/doctors`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+    });
+    const data= await res.json();
+    if(!res.ok) throw new Error(data.msg || 'Failed to create doctor');
+    return data;
+})
 
 
 
