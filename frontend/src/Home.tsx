@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDoctors } from "./store";
+import { getDoctors, getCities,getSpecialities } from "./store";
 import { DoctorCard } from "./DoctorCard";
 
 export function Home() {
@@ -12,9 +12,9 @@ export function Home() {
     const specialities = useSelector((state: any) => state.specialities);
 
     useEffect(() => {
-      dispatch(getDoctors({limit:4, for: mostSearched}));
-      dispatch(getCities());
-      dispatch(getSpecialities());
+      dispatch(getDoctors({limit:4, for: 'mostSearched'}) as any);
+      dispatch(getCities() as any);
+      dispatch(getSpecialities() as any);
     },[dispatch]);
 
 
@@ -22,8 +22,8 @@ export function Home() {
         e.preventDefault();
         const form = e.currentTarget;
         const name = (form.elements.namedItem('name') as HTMLInputElement)?.value?.trim() || '';
-        const city = (form.elements.namedItem('city') as HTMLInputElement)?.value || '';
-        const speciality = (form.elements.namedItem('speciality') as HTMLInputElement)?.value || '';
+        const city = (form.elements.namedItem('city') as HTMLSelectElement)?.value || '';
+        const speciality = (form.elements.namedItem('speciality') as HTMLSelectElement)?.value || '';
         const params = new URLSearchParams();
         if(name) params.set('name', name);
         if(city) params.set('city', city);
@@ -62,7 +62,7 @@ export function Home() {
                 <form onSubmit={onSearch} className="form">
                     <input name ="name" placeholder="Doctor name" className="input" />
                     <select name="city" className="select">
-                        <option>All Cities</option>
+                        <option value="">All Cities</option>
                         {Array.isArray(cities) && cities.map((c) => (
                             <option key={c.id} value={c.name}>{c.name}</option>
                         )
@@ -70,7 +70,7 @@ export function Home() {
                     </select>
 
                     <select name="speciality" className="select"> 
-                        <option>All specialities</option>
+                        <option value="">All specialities</option>
                         {Array.isArray(specialities) && specialities.map((s) => (
                             <option key={s.id} value={s.name}>{s.name}</option>
                         ))}

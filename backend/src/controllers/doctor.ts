@@ -33,7 +33,8 @@ export const getDoctors = async (req: Request, res: Response) => {
     
     
     if(name) {
-        query+= `AND d.name LIKE ${name}$`;
+        const safeName = String(name).replace(/'/g, "''");
+        query += ` AND d.name LIKE '%${safeName}%'`;
     }
     if(cityId) {
         query+= `AND d.city_id = ${cityId}`;

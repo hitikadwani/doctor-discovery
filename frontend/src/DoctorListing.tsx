@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useDispatch, UseDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getDoctors } from "./store";
 import { DoctorCard } from "./DoctorCard";
 
@@ -14,7 +14,7 @@ export function DoctorListing() {
       const name = searchParams.get('name') || undefined;
       const city = searchParams.get('city') || undefined;
       const speciality =searchParams.get('speciality') || undefined;
-      dispatch(getDoctors({ name, city, speciality, limit: 20, for: 'listing'}));
+      dispatch(getDoctors({ name, city, speciality, limit: 20, for: 'listing'}) as any);
     },[dispatch, searchParams]);
 
 

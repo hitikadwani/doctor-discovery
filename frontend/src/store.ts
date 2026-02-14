@@ -1,6 +1,7 @@
 import { configureStore, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const BASE = 'http:localhost:5000/api';
+
+const BASE = 'http://localhost:5000/api';
 
 
 
@@ -33,9 +34,17 @@ export const getDoctors = createAsyncThunk('doctors/getDoctors',
     }
 );
 
-//export const cities 
+export const getCities = createAsyncThunk('/app/getCities', async () => {
+    const res = await fetch(`${BASE}/cities`);
+    return res.json();
+});
 
-//export const specialities
+export const getSpecialities = createAsyncThunk('/app/getSpecialities', async () => {
+    const res = await fetch(`${BASE}/specialities`);
+    return res.json();
+})
+
+
 
 const slice = createSlice({
     name: 'app',
@@ -62,7 +71,7 @@ const slice = createSlice({
         builder.addCase(getSpecialities.fulfilled, (state, action) => {
             state.specialities = action.payload;
         })
-
+        
     }
 });
 
