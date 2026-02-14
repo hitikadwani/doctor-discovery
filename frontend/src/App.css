@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.doctor-detail .back-btn { margin-bottom: 1rem; }
+.detail-card { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start; }
+.detail-img { width: 200px; height: 200px; object-fit: cover; border-radius: 8px; }
+.detail-img-placeholder { background: #e5e5e5; display: flex; align-items: center; justify-content: center; color: #888; }
+.detail-body { flex: 1; min-width: 200px; }
+.detail-body h1 { margin-top: 0; }
+.detail-body p { margin: 0.4rem 0; }

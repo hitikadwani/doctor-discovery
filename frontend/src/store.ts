@@ -45,6 +45,11 @@ export const getSpecialities = createAsyncThunk('app/getSpecialities', async () 
     return res.json();
 })
 
+export const getDoctorById = createAsyncThunk('app/getDoctorById', async(id: string) => {
+    const res = await fetch(`${BASE}/doctors/${id}`);
+    return res.json();
+});
+
 
 
 const slice = createSlice({
@@ -54,6 +59,7 @@ const slice = createSlice({
         mostSearched: [] as any[],
         cities: [] as any[],
         specialities: [] as any[],
+        doctorDetail: null as any,
         loading: false,
     },
     reducers:{},
@@ -77,6 +83,9 @@ const slice = createSlice({
         });
         builder.addCase(getSpecialities.fulfilled, (state, action) => {
             state.specialities = action.payload;
+        });
+        builder.addCase(getDoctorById.fulfilled, (state,action) => {
+            state.doctorDetail=action.payload;
         })
         
     }

@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { Home } from './Home';
 import { DoctorListing } from './DoctorListing';
+import { DoctorDetail } from './DoctorDetail';
 import './index.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/doctors" element={<DoctorListing />} />
+        <Route path="doctors/:id" element={<DoctorDetail />} />
       </Routes>
       </BrowserRouter>
     </Provider>
