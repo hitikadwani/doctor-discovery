@@ -6,22 +6,44 @@ export const getDoctors = async (req: Request, res: Response) => {
     const { name, city, speciality, page = 1, limit = 10 } =req.query;
     const offset = (Number(page)-1)*Number(limit);
 
+    let cityId: number | null = null;
+    if(city && typeof city=== 'string') {
+       const [cityRows]: any = await pool.query(`Select id from cities where name =?`, [city.trim()]);
+       if(cityRows.length>0) {
+        cityId=cityRows[0].id;
+       }
+       if(cityId===null) {
+        return res.json([]);
+       }
+    }
+
+    let specialityId: number | null = null;
+    if(speciality && typeof speciality=== 'string') {
+        const [specialityRows]: any = await pool.query('Select id from specialities where name =?', [speciality.trim()]);
+        if(specialityRows.length>0) {
+            specialityId=specialityRows[0].id;
+        }
+        if(specialityId===null) {
+            return res.json([]);
+        }
+    }
+
     let query = `Select d.* from doctor d inner join specialities s on d.speciality_id = s.id inner join cities c on c.id=d.city_id where 1=1  `;
 
-    //const values: any [] = [];
+    
     
     if(name) {
         query+= `AND d.name LIKE ${name}$`;
     }
-    if(city) {
-        query+= `AND d.city_id = ${city}`;
+    if(cityId) {
+        query+= `AND d.city_id = ${cityId}`;
     }
 
-    if(speciality) {
-       query+= `AND d.speciality_id = ${speciality}`;
+    if(specialityId) {
+       query+= `AND d.speciality_id = ${specialityId}`;
     }
 
-    query += `LIMIT ${Number(limit)} OFFSET ${offset}`;
+    query += ` LIMIT ${Number(limit)} OFFSET ${offset}`;
     const [rows] = await pool.query(query);
 
     res.json(rows);
@@ -54,6 +76,8 @@ export const getDoctorById = async(req: Request, res: Response) => {
 export const createDoctor = async (req: Request, res: Response) => {
     try {
         const { name, gender, age, email, phone, city_id, speciality_id,institute_name, degree_name, YOE, consultation_fee, profile_picture } = req.body;
+
+        
 
         const [result]: any = await pool.query(`Insert into doctor (name, gender, age, email, phone, city_id, speciality_id, institute_name, degree_name, YOE, consultation_fee, profile_picture) VALUES 
            (?,?,?,?,?,?,?,?,?,?,?,?)`, [name, gender,age, email, phone, city_id, speciality_id, institute_name, degree_name, YOE, consultation_fee, profile_picture]);
