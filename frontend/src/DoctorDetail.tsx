@@ -14,9 +14,9 @@ export function DoctorDetail() {
         if(id) dispatch(getDoctorById(id) as any);
     },[dispatch,id]);
 
-    if (!id) return <p>Invalid link.</p>;
-    if (doctor?.msg === "Doctor not found") return <p>Doctor not found.</p>;
-    if (!doctor) return <p>Loading...</p>;
+    if (!id) return <p className="detail-message">Invalid link.</p>;
+    if (doctor?.msg === "Doctor not found") return <p className="detail-message">Doctor not found.</p>;
+    if (!doctor) return <p className="detail-message">Loading...</p>;
 
     const d = doctor;
 
@@ -26,12 +26,12 @@ export function DoctorDetail() {
     ) : null;
 
     return (
-        <div className="page doctor-detail">
+        <div className="page detail-page">
             <button type="button" className="btn back-btn" onClick={() => navigate(-1)}>Back</button>
             <div className="detail-card">
-                {d.profile_picture ? (<img src={d.profile_picture} alt="" className="detail-img" />) : ( <div className="detail-img detail-img-placeholder">No Photo</div>)}
+                {d.profile_picture ? (<img src={d.profile_picture} alt="" className="detail-img" />) : (<div className="detail-img detail-img-placeholder">No Photo</div>)}
                 <div className="detail-body">
-                    <h1>{d.NAME}</h1>
+                    <h1 className="detail-name">{d.NAME}</h1>
                     {row("Gender",d.gender)}
                     {row("Age", d.AGE)}
                     {row("Email", d.EMAIL)}

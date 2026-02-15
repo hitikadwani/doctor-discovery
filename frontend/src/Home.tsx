@@ -33,20 +33,20 @@ export function Home() {
 
 
     return (
-        <div className="page">
-            <h1>Find a Doctor</h1>
+        <div className="page home-page">
+            <h1 className="home-title">Find a Doctor</h1>
 
-            <section>
-                <h2>Most Searched Doctors</h2>
-                <div className="grid">
+            <section className="home-section home-most-searched">
+                <h2 className="section-title">Most Searched Doctors</h2>
+                <div className="doctor-grid">
                     {Array.isArray(mostSearched) && mostSearched.map((d) => (
                         <DoctorCard key={d.id ?? d.ID} doctor={d} />
                     ))}
                 </div>
             </section>
 
-            <section>
-                <h2> Specialities</h2>
+            <section className="home-section">
+                <h2 className="section-title">Specialities</h2>
                 <div className="tags">
                     {Array.isArray(specialities) && specialities.map((s) => (
                         <button key={s.id} type="button" className="tag" onClick={() => navigate(`/doctors?speciality=${encodeURIComponent(s.name)}`)}>
@@ -57,9 +57,9 @@ export function Home() {
             </section>
 
 
-            <section>
-                <h2>Search & Filter</h2>
-                <form onSubmit={onSearch} className="form">
+            <section className="home-section">
+                <h2 className="section-title">Search & Filter</h2>
+                <form onSubmit={onSearch} className="form search-form">
                     <input name ="name" placeholder="Doctor name" className="input" />
                     <select name="city" className="select">
                         <option value="">All Cities</option>

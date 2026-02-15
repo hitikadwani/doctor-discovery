@@ -1,5 +1,5 @@
 import { configureStore, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { error } from "console";
+
 
 
 const BASE = 'http://localhost:5000/api';

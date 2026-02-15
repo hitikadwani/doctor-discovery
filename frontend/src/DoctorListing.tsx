@@ -48,34 +48,35 @@ export function DoctorListing() {
     };
      
     return (
-        <div className="page">
-            <h1>Doctors</h1>
+        <div className="page listing-page">
+            <h1 className="listing-title">Doctors</h1>
             <section className="listing-header">
                 <form onSubmit={onSearch} className="form">
-                   <input name="name" placeholder="Search by doctor name" className="input" defaultValue={name} />
-                   <select name="city" className="select" defaultValue={city} >
-                   <option value=""> All Cities</option>
-                   {Array.isArray(cities) && cities.map((c) => (
-                    <option key={c.id} value={c.name}>{c.name}</option>
-                   ))}
-                   </select>
-                   <select name="speciality" className="select" defaultValue={speciality}>
-                    <option value="">All Specialities</option>
-                    {Array.isArray(specialities) && specialities.map((s) => (
-                        <option key={s.id} value={s.name}>{s.name}</option>
-                    ))}
-                   </select>
+                    <input name="name" placeholder="Search by doctor name" className="input" defaultValue={name} />
+                    <select name="city" className="select" defaultValue={city}>
+                        <option value="">All Cities</option>
+                        {Array.isArray(cities) && cities.map((c) => (
+                            <option key={c.id} value={c.name}>{c.name}</option>
+                        ))}
+                    </select>
+                    <select name="speciality" className="select" defaultValue={speciality}>
+                        <option value="">All Specialities</option>
+                        {Array.isArray(specialities) && specialities.map((s) => (
+                            <option key={s.id} value={s.name}>{s.name}</option>
+                        ))}
+                    </select>
+                    <button type="submit" className="btn">Apply</button>
                 </form>
             </section>
 
-            {loading && <p>Loading...</p>}
-            <div className="grid">
+            {loading && <p className="listing-loading">Loading...</p>}
+            <div className="grid listing-grid">
                 {Array.isArray(doctors) && doctors.map((d) => (
                    <DoctorCard key={d.id ?? d.ID} doctor={d} />
                 ))}
             </div>
             {!loading && Array.isArray(doctors) && doctors.length === 0 && (
-                 <p>No doctors found.</p>
+                <p className="listing-empty">No doctors found.</p>
             )}
         </div>
     )

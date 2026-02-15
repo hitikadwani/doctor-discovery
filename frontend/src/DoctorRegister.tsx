@@ -97,14 +97,14 @@ export function DoctorRegister() {
   };
 
   return (
-    <div className="page">
-      <h1>Doctor Registration</h1>
+    <div className="page register-page">
+      <h1 className="register-title">Doctor Registration</h1>
       <p className="step-info">Step {step} of 2</p>
       {error && <p className="form-error">{error}</p>}
 
       {step === 1 && (
         <form className="register-form" onSubmit={(e) => { e.preventDefault(); onNext(); }}>
-          <h2>Personal Information</h2>
+          <h2 className="form-step-title">Personal Information</h2>
           <input
             placeholder="Name"
             value={form.name}
@@ -144,8 +144,8 @@ export function DoctorRegister() {
               <option key={c.id} value={c.name}>{c.name}</option>
             ))}
           </select>
-          <div>
-            <label>Profile picture</label>
+          <div className="form-field">
+            <label className="form-label">Profile picture</label>
             <input type="file" accept="image/*" onChange={onFileChange} className="input" />
             {form.profile_picture && <p className="small">Image selected.</p>}
           </div>
@@ -155,7 +155,7 @@ export function DoctorRegister() {
 
       {step === 2 && (
         <form className="register-form" onSubmit={onSubmit}>
-          <h2>Professional Details</h2>
+          <h2 className="form-step-title">Professional Details</h2>
           <input
             placeholder="Institute name"
             value={form.institute_name}
