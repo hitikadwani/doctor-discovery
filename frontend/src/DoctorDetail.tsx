@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { getDoctorById } from "./store";
+
+const SERVER = "http://localhost:5000";
 
 
 export function DoctorDetail() {
@@ -9,6 +11,7 @@ export function DoctorDetail() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const doctor = useSelector((state: any) => state.doctorDetail);
+    const [imgError, setImgError] = useState(false);
 
     useEffect(() => {
         if(id) dispatch(getDoctorById(id) as any);
@@ -19,6 +22,10 @@ export function DoctorDetail() {
     if (!doctor) return <p className="detail-message">Loading...</p>;
 
     const d = doctor;
+    const profilePic = d.profile_picture ?? d.PROFILE_PICTURE;
+    const hasImg = profilePic && !imgError;
+    const url = profilePic;
+    const imgSrc = hasImg ? (url.startsWith('http') ? url : SERVER + url) : null;
 
     const row = (label: string, value: string | number | null | undefined) =>
         value != null && value !== "" ? (
@@ -29,7 +36,11 @@ export function DoctorDetail() {
         <div className="page detail-page">
             <button type="button" className="btn back-btn" onClick={() => navigate(-1)}>Back</button>
             <div className="detail-card">
-                {d.profile_picture ? (<img src={d.profile_picture} alt="" className="detail-img" />) : (<div className="detail-img detail-img-placeholder">No Photo</div>)}
+                {imgSrc ? (
+                    <img src={imgSrc} alt="" className="detail-img" onError={() => setImgError(true)} />
+                ) : (
+                    <div className="detail-img detail-img-placeholder">No Photo</div>
+                )}
                 <div className="detail-body">
                     <h1 className="detail-name">{d.NAME}</h1>
                     {row("Gender",d.gender)}

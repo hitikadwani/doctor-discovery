@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { pool } from '../config/db'
+import { pool } from '../config/db';
+import fs from 'fs';
+import path from 'path';
+
+const uploadDir = path.join(__dirname, '../../uploads');
 
 export const getDoctors = async (req: Request, res: Response) => {
    try {
@@ -76,7 +80,8 @@ export const getDoctorById = async(req: Request, res: Response) => {
 
 export const createDoctor = async (req: Request, res: Response) => {
     try {
-        const { name, gender, age, email, phone, city, speciality,institute_name, degree_name, YOE, consultation_fee, profile_picture } = req.body;
+        const { name, gender, age, email, phone, city, speciality, institute_name, degree_name, YOE, consultation_fee } = req.body;
+        let profile_picture = req.body.profile_picture;
          console.log("creating doctor");
          let city_id: number | null = null;
          if(city && typeof city === 'string') {
@@ -101,6 +106,17 @@ export const createDoctor = async (req: Request, res: Response) => {
                 return res.status(400).json({msg: 'Invalid speciality name'});
             }
          }
+
+          if (profile_picture && typeof profile_picture === 'string' && profile_picture.match(/^data:image\/\w+;base64,/)) {
+            const match = profile_picture.match(/^data:image\/(\w+);base64,(.+)$/);
+            if (match) {
+              const ext = match[1] === 'jpeg' ? 'jpg' : match[1];
+              const filename = `doctor-${Date.now()}.${ext}`;
+              if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+              fs.writeFileSync(path.join(uploadDir, filename), Buffer.from(match[2] as any, 'base64'));
+              profile_picture = `/uploads/${filename}`;
+            }
+          }
 
         const [result]: any = await pool.query(`Insert into doctor (name, gender, age, email, phone, city_id, speciality_id, institute_name, degree_name, YOE, consultation_fee, profile_picture) VALUES 
            (?,?,?,?,?,?,?,?,?,?,?,?)`, [name, gender,age, email, phone, city_id, speciality_id, institute_name, degree_name, YOE, consultation_fee, profile_picture]);

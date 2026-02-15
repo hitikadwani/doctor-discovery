@@ -50,7 +50,9 @@ section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
   height: 140px;
   background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
   object-fit: cover;
+  object-position: top center;
   width: 100%;
+  display: block;
 }
 .home-most-searched .card-img-placeholder {
   height: 140px;
@@ -81,7 +83,7 @@ section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
 .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px #ccc; cursor: pointer; }
 .card:hover { box-shadow: 0 2px 8px #999; }
-.card-img { height: 100px; background: #e5e5e5; object-fit: cover; width: 100%; }
+.card-img { height: 100px; background: #e5e5e5; object-fit: cover; object-position: top center; width: 100%; display: block; }
 .card-img-placeholder { display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.85rem; }
 .card-body { padding: 0.6rem; }
 .card-body h3 { margin: 0 0 0.3rem; font-size: 0.95rem; }
@@ -155,7 +157,7 @@ section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
 .listing-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
 .listing-page .card { border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: box-shadow 0.2s; }
 .listing-page .card:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
-.listing-page .card-img { height: 120px; }
+.listing-page .card-img { height: 120px; object-fit: cover; object-position: top center; }
 .listing-page .card-img-placeholder { height: 120px; }
 .listing-loading, .listing-empty { color: #64748b; margin: 0.5rem 0; }
 
