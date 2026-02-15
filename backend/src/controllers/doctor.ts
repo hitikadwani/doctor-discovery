@@ -7,7 +7,7 @@ const uploadDir = path.join(__dirname, '../../uploads');
 
 export const getDoctors = async (req: Request, res: Response) => {
    try {
-    const { name, city, speciality, page = 1, limit = 10 } =req.query;
+    const { name, city, speciality, page = 1, limit = 10, sort } = req.query;
     const offset = (Number(page)-1)*Number(limit);
 
     let cityId: number | null = null;
@@ -46,6 +46,10 @@ export const getDoctors = async (req: Request, res: Response) => {
 
     if(specialityId) {
        query+= `AND d.speciality_id = ${specialityId}`;
+    }
+
+    if (sort === 'mostSearched') {
+        query += ` ORDER BY d.search_count DESC`;
     }
 
     query += ` LIMIT ${Number(limit)} OFFSET ${offset}`;

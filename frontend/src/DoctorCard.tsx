@@ -22,9 +22,9 @@ export function DoctorCard({doctor}: {doctor: any}) {
                 <h3>{doctor.NAME}</h3>
                 {doctor.speciality_name && <p className="card-meta">{doctor.speciality_name}</p>}
                 {doctor.city_name && <p className="card-meta">{doctor.city_name}</p>}
-                {doctor.YOE!=null && <p className="card-meta">{doctor.YOE}</p>}
-                {doctor.consultation_fee && <p className="card-meta">{doctor.consultation_fee}</p>}
-                {doctor.degree_name && <p className="card-meta">{doctor.degree_name}</p>}
+                {doctor.YOE!=null && <p className="card-meta">{doctor.YOE} Years of Experience Overall </p>}
+                {doctor.CONSULTATION_FEE && <p className="card-meta">₹{doctor.CONSULTATION_FEE} Consultation fee at clinic</p>}
+                {/* {doctor.degree_name && <p className="card-meta">{doctor.degree_name}</p>} */}
             </div>
         </div>
     )

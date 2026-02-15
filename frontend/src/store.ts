@@ -22,6 +22,7 @@ export const getDoctors = createAsyncThunk('app/getDoctors',
         if(rest.speciality) q.set('speciality', rest.speciality);
         if(rest.page != null ) q.set('page', rest.page.toString());
         if(rest.limit != null)  q.set('limit', rest.limit.toString());
+        if (target === 'mostSearched') q.set('sort', 'mostSearched');
 
         const res =await fetch(`${BASE}/doctors?${q}`);
         const data = await res.json();
