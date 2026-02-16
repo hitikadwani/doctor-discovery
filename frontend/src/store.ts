@@ -85,13 +85,7 @@ const slice = createSlice({
                 state.mostSearched=data;
             }else {
                 const limit = action.payload.limit ?? 10;
-                if (page ===1) {
-                    if (state.doctors.length <= limit) {
-                        state.doctors = data;
-                    }
-                } else {
-                    state.doctors = [...state.doctors, ...data];
-                }
+                state.doctors = data;
                 state.hasMore = data.length >= limit;
             }
             state.loading = false;

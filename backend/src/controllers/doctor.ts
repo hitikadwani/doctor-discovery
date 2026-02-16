@@ -115,7 +115,7 @@ export const createDoctor = async (req: Request, res: Response) => {
           if (profile_picture && typeof profile_picture === 'string' && profile_picture.match(/^data:image\/\w+;base64,/)) {
             const match = profile_picture.match(/^data:image\/(\w+);base64,(.+)$/);
             if (match) {
-              const ext = match[1] === 'jpeg' ? 'jpg' : match[1];
+              const ext = match[1] === 'jpeg'?'jpg' : match[1];
               const filename = `doctor-${Date.now()}.${ext}`;
               if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
               fs.writeFileSync(path.join(uploadDir, filename), Buffer.from(match[2] as any, 'base64'));
