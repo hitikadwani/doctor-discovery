@@ -20,9 +20,10 @@ export const getDoctors = async (req: Request, res: Response) => {
         return res.json([]);
        }
     }
-
+    console.log("outside");
     let specialityId: number | null = null;
     if(speciality && typeof speciality=== 'string') {
+        console.log("here in spec");
         const [specialityRows]: any = await pool.query('Select id from specialities where name =?', [speciality.trim()]);
         if(specialityRows.length>0) {
             specialityId=specialityRows[0].id;
@@ -40,12 +41,12 @@ export const getDoctors = async (req: Request, res: Response) => {
         const safeName = String(name).replace(/'/g, "''");
         query += ` AND d.name LIKE '%${safeName}%'`;
     }
-    if(cityId) {
-        query+= `AND d.city_id = ${cityId}`;
+    if (cityId) {
+        query += ` AND d.city_id = ${cityId}`;
     }
 
-    if(specialityId) {
-       query+= `AND d.speciality_id = ${specialityId}`;
+    if (specialityId) {
+        query += ` AND d.speciality_id = ${specialityId}`;
     }
 
     if (sort === 'mostSearched') {

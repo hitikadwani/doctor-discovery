@@ -120,8 +120,12 @@ export function DoctorRegister() {
           <input
             type="number"
             placeholder="Age"
+            min={0}
             value={form.age}
-            onChange={(e) => update("age", e.target.value)}
+            onChange={(e) => {
+              const v = e.target.value;
+              if (v === "" || Number(v) >= 0) update("age", v);
+            }}
             className="input"
           />
           <input

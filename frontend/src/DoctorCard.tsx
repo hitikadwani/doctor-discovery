@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const SERVER = 'http://localhost:5000';
+const SERVER = process.env.REACT_APP_BASE ?? 'http://localhost:5000';
 
 export function DoctorCard({doctor}: {doctor: any}) {
     const navigate = useNavigate();

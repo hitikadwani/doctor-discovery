@@ -1,8 +1,8 @@
 import { configureStore, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-
-const BASE = 'http://localhost:5000/api';
+const BASE = `${process.env.REACT_APP_BASE ?? 'http://localhost:5000'}/api`;
+//console.log(BASE);
 
 
 
