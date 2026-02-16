@@ -37,8 +37,8 @@ export function DoctorRegister() {
     setError("");
   };
 
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const onFileChange = (e: any) => {
+    const file = e?.target?.files?.[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => update("profile_picture", reader.result as string);
@@ -80,7 +80,7 @@ export function DoctorRegister() {
     };
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     setError("");
     const payload = buildPayload();
@@ -187,9 +187,9 @@ export function DoctorRegister() {
           />
           <input
             type="number"
-            step="0.01"
             placeholder="Consultation Fee"
             value={form.consultation_fee}
+            min={100}
             onChange={(e) => update("consultation_fee", e.target.value)}
             className="input"
           />
@@ -197,7 +197,9 @@ export function DoctorRegister() {
             <button type="button" className="btn" onClick={() => setStep(1)}>Back</button>
             <button type="submit" className="btn">Submit</button>
           </div>
+          
         </form>
+        
       )}
     </div>
   );

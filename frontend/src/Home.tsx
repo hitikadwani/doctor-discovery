@@ -18,12 +18,12 @@ export function Home() {
     },[dispatch]);
 
 
-    const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSearch = (e: any) => {
         e.preventDefault();
         const form = e.currentTarget;
-        const name = (form.elements.namedItem('name') as HTMLInputElement)?.value?.trim() || '';
-        const city = (form.elements.namedItem('city') as HTMLSelectElement)?.value || '';
-        const speciality = (form.elements.namedItem('speciality') as HTMLSelectElement)?.value || '';
+        const name = (form.elements.namedItem('name') as any)?.value?.trim() || '';
+        const city = (form.elements.namedItem('city') as any)?.value || '';
+        const speciality = (form.elements.namedItem('speciality') as any)?.value || '';
         const params = new URLSearchParams();
         if(name) params.set('name', name);
         if(city) params.set('city', city);
@@ -78,8 +78,6 @@ export function Home() {
                     <button type="submit" className="btn">Search</button>
                 </form>
             </section>
-
-            
         </div>
     )
 }

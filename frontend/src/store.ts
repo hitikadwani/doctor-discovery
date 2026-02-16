@@ -31,7 +31,7 @@ export const getDoctors = createAsyncThunk('app/getDoctors',
         if (target === 'mostSearched') {
           return { data, target: 'mostSearched', page: 1 };
         } else {
-          return { data, target: 'listing',page };
+          return { data, target: 'listing',page, limit: rest.limit ?? 10 };
         }
 
     }
@@ -74,6 +74,7 @@ const slice = createSlice({
         specialities: [] as any[],
         doctorDetail: null as any,
         loading: false,
+        hasMore: true
     },
     reducers:{},
     extraReducers: (builder) => {
@@ -83,13 +84,17 @@ const slice = createSlice({
             if(target === 'mostSearched') {
                 state.mostSearched=data;
             }else {
-                if(page ===1) {
-                    state.doctors=data;
-                }else {
-                    state.doctors=[...state.doctors, ...data];
+                const limit = action.payload.limit ?? 10;
+                if (page ===1) {
+                    if (state.doctors.length <= limit) {
+                        state.doctors = data;
+                    }
+                } else {
+                    state.doctors = [...state.doctors, ...data];
                 }
+                state.hasMore = data.length >= limit;
             }
-            state.loading=false;
+            state.loading = false;
         });
         builder.addCase(getCities.fulfilled, (state, action) => {
             state.cities=action.payload;
