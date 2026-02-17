@@ -1,4 +1,4 @@
-* { box-sizing: border-box; }
+  * { box-sizing: border-box; }
 body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #f5f5f5; padding: 1rem; color: #1a1a1a; }
 
 .page { max-width: 900px; margin: 0 auto; }
@@ -6,7 +6,7 @@ h1 { font-size: 1.4rem; }
 section { margin-bottom: 1.5rem; }
 section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
 
-/* Home page */
+
 .home-page { padding-bottom: 2rem; }
 .home-title {
   font-size: 1.75rem;
@@ -24,32 +24,34 @@ section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
   border-bottom: 2px solid #e2e8f0;
 }
 
-/* Most Searched Doctors */
+
 .home-most-searched { margin-bottom: 2.5rem; }
 .doctor-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.25rem;
+  display: block;
+}
+.doctor-grid .card {
+  display: inline-block;
+  width: 200px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  vertical-align: top;
 }
 .home-most-searched .card {
   background: #fff;
   border-radius: 12px;
-  overflow: hidden;
   cursor: pointer;
   border: 1px solid #e2e8f0;
 }
 .home-most-searched .card-img {
   height: 140px;
   background: #e2e8f0;
-  object-fit: fill;
   width: 100%;
   display: block;
 }
 .home-most-searched .card-img-placeholder {
   height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  padding-top: 60px;
   color: #64748b;
   font-size: 0.85rem;
   background: #e2e8f0;
@@ -70,30 +72,40 @@ section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
   line-height: 1.4;
 }
 
-/* Grid and cards (other pages) */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+
+.grid { display: block; }
+.grid .card {
+  display: inline-block;
+  width: 180px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  vertical-align: top;
+}
 .card { background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; cursor: pointer; }
-.card-img { height: 100px; background: #e5e5e5; object-fit: cover; width: 100%; display: block; }
-.card-img-placeholder { display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.85rem; background: #e5e5e5; }
+.card-img { height: 100px; background: #e5e5e5; width: 100%; display: block; }
+.card-img-placeholder { text-align: center; padding-top: 40px; color: #888; font-size: 0.85rem; background: #e5e5e5; height: 100px; }
 .card-body { padding: 0.6rem; }
 .card-body h3 { margin: 0 0 0.3rem; font-size: 0.95rem; }
 .card-body p { margin: 0.2rem 0; font-size: 0.85rem; color: #666; }
 
-.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.tag { padding: 0.4rem 0.75rem; border: 1px solid #bbb; border-radius: 6px; background: #fff; cursor: pointer; font-size: 0.9rem; }
+.tags { display: block; }
+.tag { display: inline-block; padding: 0.4rem 0.75rem; border: 1px solid #bbb; border-radius: 6px; background: #fff; cursor: pointer; font-size: 0.9rem; margin-right: 0.5rem; margin-bottom: 0.5rem; }
 
-.form { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.form { display: block; }
+.form .input,
+.form .select,
+.form .btn {
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 .input, .select { padding: 0.5rem; border: 1px solid #bbb; border-radius: 6px; }
-.input { flex: 1; min-width: 120px; }
-.select { min-width: 110px; }
+.input { width: 200px; }
+.select { width: 150px; }
 .btn { padding: 0.5rem 1rem; border: none; border-radius: 6px; background: #2563eb; color: #fff; cursor: pointer; }
 
-/* Home search form */
+
 .home-page .search-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
   padding: 1rem;
   background: #fff;
   border-radius: 12px;
@@ -112,92 +124,98 @@ section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
   font-weight: 500;
 }
 
-/* Doctor Listing page */
+
 .listing-title { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 1rem; }
 .listing-header { background: #fff; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
 .listing-header .form { margin: 0; }
-.listing-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
+.listing-grid { display: block; }
+.listing-grid .card {
+  display: inline-block;
+  width: 200px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  vertical-align: top;
+}
 .listing-page .card { border-radius: 10px; border: 1px solid #e2e8f0; }
-.listing-page .card-img { height: 120px; object-fit: fill; }
-.listing-page .card-img-placeholder { height: 120px; }
+.listing-page .card-img { height: 120px; width: 100%; }
+.listing-page .card-img-placeholder { height: 120px; text-align: center; padding-top: 50px; }
 .listing-loading, .listing-empty { color: #64748b; margin: 0.5rem 0; }
 
-/* Listing pagination */
+
 .listing-pagination {
   margin: 1.5rem 0 0;
   padding-top: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
+  text-align: center;
   border-top: 1px solid #e2e8f0;
+}
+.listing-pagination .btn {
+  margin: 0 0.25rem;
 }
 .listing-page-indicator {
   font-size: 0.9rem;
   color: #64748b;
+  margin: 0 0.5rem;
 }
 
-/* Doctor Detail page */
+
 .detail-message { color: #64748b; margin: 1rem 0; }
 .detail-page .back-btn { margin-bottom: 1.25rem; }
 .detail-page .detail-card {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  align-items: flex-start;
   background: #fff;
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
-}
-.detail-page .detail-name-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-.detail-page .detail-name { margin: 0; font-size: 1.35rem; font-weight: 600; color: #0f172a; }
-.detail-page .detail-badge {
-  margin: 0;
+  display: table;
+  width: 100%;
 }
 .detail-page .detail-img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
+  width: 290px;
+  height: 290px;
   border-radius: 10px;
+  display: table-cell;
+  vertical-align: top;
+  padding-right: 0.5rem;
 }
 .detail-page .detail-img-placeholder {
   width: 200px;
   height: 200px;
   border-radius: 10px;
   background: #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  padding-top: 90px;
   color: #64748b;
+  display: table-cell;
+  vertical-align: top;
+  padding-right: 0.5rem;
 }
-.detail-page .detail-body { flex: 1; min-width: 200px; }
+.detail-page .detail-name-row {
+  display: block;
+  margin-bottom: 1rem;
+}
+.detail-page .detail-name { margin: 0; font-size: 1.35rem; font-weight: 600; color: #0f172a; display: inline-block; }
+.detail-page .detail-badge {
+  margin: 0 0 0 0.5rem;
+}
+.detail-page .detail-body { display: table-cell; vertical-align: top; }
 .detail-page .detail-body p { margin: 0.4rem 0; color: #334155; }
 .detail-page .detail-body strong { color: #0f172a; }
 
-/* Doctor Register page */
+
 .register-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding-top: 1.5rem;
-  min-height: calc(100vh - 2rem);
+  text-align: center;
 }
-.register-title { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 1rem; text-align: center; }
-.register-page .step-info { color: #64748b; font-size: 0.9rem; margin-bottom: 1rem; text-align: center; }
-.register-page .form-error { color: #c00; margin-bottom: 1rem; font-size: 0.9rem; text-align: center; }
+.register-title { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 1rem; }
+.register-page .step-info { color: #64748b; font-size: 0.9rem; margin-bottom: 1rem; }
+.register-page .form-error { color: #c00; margin-bottom: 1rem; font-size: 0.9rem; }
 .register-page .register-form {
   max-width: 420px;
+  margin: 0 auto;
   background: #fff;
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
+  text-align: left;
 }
 .register-page .form-step-title { font-size: 1rem; font-weight: 600; color: #334155; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; }
 .register-page .register-form .input,
@@ -206,7 +224,10 @@ section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
 .register-page .register-form .form-label { display: block; font-size: 0.85rem; color: #64748b; margin-bottom: 0.25rem; }
 .register-page .register-form .small { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; }
 .register-page .register-form .btn { padding: 0.6rem 1.25rem; border-radius: 8px; margin-top: 0.25rem; }
-.register-page .form-actions { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+.register-page .form-actions { display: block; margin-top: 1.25rem; }
+.register-page .form-actions .btn {
+  margin-right: 0.75rem;
+}
 
 .detail-badge {
   display: inline-block;
@@ -216,6 +237,5 @@ section h2 { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 600;
-  margin-left: 0.5rem;
   vertical-align: middle;
 }
