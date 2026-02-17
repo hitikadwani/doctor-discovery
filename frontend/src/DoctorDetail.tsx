@@ -32,7 +32,7 @@ export function DoctorDetail() {
     const currentId = d.id ?? d.ID;
     const isTopSearched = Array.isArray(mostSearched) && mostSearched.some((doc: any) => Number(doc.id ?? doc.ID) === Number(currentId));
 
-    const row = (label: string, value: string | number | null | undefined) =>
+    const row = (label: string, value: string|number|null|undefined) =>
         value != null && value !== "" ? (
           <p><strong>{label}:</strong> {value}</p>
     ) : null;
@@ -41,16 +41,18 @@ export function DoctorDetail() {
         <div className="page detail-page">
             <button type="button" className="btn back-btn" onClick={() => navigate(-1)}>Back</button>
             <div className="detail-card">
-                {isTopSearched && (
-                    <span className="detail-badge">Top 10 Most Searched</span>
-                )}
                 {imgSrc ? (
                     <img src={imgSrc} alt="" className="detail-img" onError={() => setImgError(true)} />
                 ) : (
                     <div className="detail-img detail-img-placeholder">No Photo</div>
                 )}
                 <div className="detail-body">
-                    <h1 className="detail-name">{d.NAME}</h1>
+                    <div className="detail-name-row">
+                        <h1 className="detail-name">{d.NAME}</h1>
+                        {isTopSearched && (
+                            <span className="detail-badge">Top 10 Most Searched</span>
+                        )}
+                    </div>
                     {row("Gender",d.gender)}
                     {row("Age", d.AGE)}
                     {row("Email", d.EMAIL)}

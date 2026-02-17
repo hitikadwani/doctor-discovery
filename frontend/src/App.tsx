@@ -5,7 +5,6 @@ import { Home } from './Home';
 import { DoctorListing } from './DoctorListing';
 import { DoctorDetail } from './DoctorDetail';
 import { DoctorRegister } from './DoctorRegister';
-import './index.css';
 
 function App() {
   return (
